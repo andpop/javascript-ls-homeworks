@@ -31,7 +31,8 @@ function returnFirstArgument(a) {
    sumWithDefaults(10) вернет 110
  */
 function sumWithDefaults(a, b) {
-    b = b || 100;
+    b = (b === undefined) ? 100 : b;
+    // b = b || 100;
 
     return a + b;
 }
@@ -62,9 +63,21 @@ function returnFnResult(fn) {
    console.log(f()); // выведет 13
  */
 function returnCounter(number) {
+    function f() {
+        number++;
+
+        return number;
+    }
+
+    if (number === undefined) {
+        number = 0;
+    }
+
+    return f;
 }
 
 /*
+
  Задание 5 *:
 
  Функция должна возвращать все переданные ей аргументы в виде массива
@@ -74,6 +87,13 @@ function returnCounter(number) {
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
+    let args = [];
+
+    for (let i = 0; i < arguments.length; i++) {
+        args[i] = arguments[i];
+    }
+
+    return args;
 }
 
 /*
@@ -92,6 +112,15 @@ function returnArgumentsArray() {
    console.log(newSum()) выведет 6
  */
 function bindFunction(fn) {
+    let args = [];
+
+    for (let i = 1; i < arguments.length; i++) {
+        args.push(arguments[i]);
+    }
+
+    return function() {
+        return fn.apply(null, args);
+    }
 }
 
 export {
