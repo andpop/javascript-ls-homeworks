@@ -12,9 +12,13 @@
 
  Другими словами: функция должна возвращать в неизменном виде то, что поступает ей на вход
  */
+/*
+// Вариант ES 5
 function returnFirstArgument(a) {
     return a;
 }
+*/
+const returnFirstArgument = a => a;
 
 /*
  Задание 2:
@@ -30,12 +34,17 @@ function returnFirstArgument(a) {
  Пример:
    sumWithDefaults(10) вернет 110
  */
+/*
+// Вариант ES 5
 function sumWithDefaults(a, b) {
     b = (b === undefined) ? 100 : b;
+    // Так неправильно, т.к. при b=0 функция вернет a+100
     // b = b || 100;
 
     return a + b;
 }
+*/
+const sumWithDefaults = (a, b = 100) => a + b;
 
 /*
  Задание 3:
@@ -45,9 +54,13 @@ function sumWithDefaults(a, b) {
  Пример:
    returnFnResult(() => 'привет') вернет 'привет'
  */
+/*
+// Вариант ES 5
 function returnFnResult(fn) {
     return fn();
 }
+*/
+const returnFnResult = fn => fn();
 
 /*
  Задание 4:
@@ -86,6 +99,8 @@ function returnCounter(number) {
  Пример:
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
+/*
+// Вариант с обычной функцией
 function returnArgumentsArray() {
     let args = [];
 
@@ -95,6 +110,8 @@ function returnArgumentsArray() {
 
     return args;
 }
+*/
+const returnArgumentsArray = (...args) => args;
 
 /*
  Задание 6 *:
@@ -111,6 +128,8 @@ function returnArgumentsArray() {
 
    console.log(newSum()) выведет 6
  */
+/*
+// Вариант 1
 function bindFunction(fn) {
     let args = [];
 
@@ -122,6 +141,19 @@ function bindFunction(fn) {
         return fn.apply(null, args);
     }
 }
+*/
+/*
+// Вариант 2
+function bindFunction(fn, ...args) {
+
+    return function() {
+        return fn.apply(null, args);
+    }
+}
+*/
+const bindFunction = (fn, ...args) => function() {
+    return fn.apply(null, args);
+};
 
 export {
     returnFirstArgument,
