@@ -75,15 +75,11 @@ const returnFnResult = fn => fn();
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(number) {
+function returnCounter(number = 0) {
     function f() {
         number++;
 
         return number;
-    }
-
-    if (number === undefined) {
-        number = 0;
     }
 
     return f;
