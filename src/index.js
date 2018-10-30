@@ -12,7 +12,6 @@ function forEach(array, fn) {
     }
 }
 
-
 /*
  Задание 2:
 
