@@ -67,18 +67,30 @@ function upperProps(obj) {
  */
 function slice(array, from, to) {
     let resultArray = [];
+    let startIndex = from,
+        endIndex = to - 1;
 
+    // Условия на начальный элемент
     if (from === undefined) {
-        from = 0;
+        startIndex = 0;
     }
+    if (from < 0) {
+        startIndex = (array.length + from >= 0) ? array.length + from : 0;
+    }
+
+    // Условия на конечный элемент
     if (to === undefined) {
-        to = array.length - 1;
+        endIndex = array.length - 1;
     }
     if (to > array.length - 1) {
-        to = array.length - 1;
+        endIndex = array.length - 1;
+    }
+    if (to < 0) {
+        endIndex = array.length - 1 + to;
     }
 
-    for (let i = from; i <= to; i++) {
+    // Копирование элементов в новый массив
+    for (let i = startIndex; i <= endIndex; i++) {
         resultArray.push(array[i]);
     }
 
