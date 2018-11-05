@@ -39,6 +39,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
         });
     });
 
+/*
     describe('prepend', () => {
         it('должна добавлять элемент в начало', () => {
             let where = document.createElement('div');
@@ -240,4 +241,5 @@ describe('ДЗ 4 - Работа с DOM', () => {
             document.body.removeChild(where);
         });
     });
+*/
 });
