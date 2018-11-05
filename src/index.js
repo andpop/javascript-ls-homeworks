@@ -158,6 +158,7 @@ function deleteTextNodesRecursive(where) {
    }
  */
 function collectDOMStat(root) {
+    // Функция для увеличения счетчика - свойства с именем counterName в объекте obj.
     function incrementCounter(obj, counterName, initial = 1, delta = 1) {
         obj[counterName] = (typeof obj[counterName] === 'undefined') ? initial : obj[counterName] + delta;
     }
@@ -178,10 +179,8 @@ function collectDOMStat(root) {
         } else if (child.nodeType === 1) {
             incrementCounter(stat.tags, child.tagName);
             if (child.classList.length > 0) {
-                for (let index = 0; index < child.classList.length; index++) {
-                    const cssClass = child.classList[index];
-
-                    incrementCounter(stat.classes, cssClass);
+                for (const CSSclass of child.classList) {
+                    incrementCounter(stat.classes, CSSclass);
                 }
             }
 
