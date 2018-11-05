@@ -158,6 +158,52 @@ function deleteTextNodesRecursive(where) {
    }
  */
 function collectDOMStat(root) {
+    function incrementCounter(obj, counterName, initial = 1, delta = 1) {
+        obj[counterName] = (typeof obj[counterName] === 'undefined') ? initial : obj[counterName] + delta;
+    }
+
+    let stat = {
+        tags: {},
+        classes: {},
+        texts: 0
+    };
+
+    let childs = root.childNodes;
+
+    for (let i = 0; i < childs.length; i++) {
+        let child = childs[i];
+
+        if (child.nodeType === 3) {
+            stat.texts ++;
+        } else if (child.nodeType === 1) {
+            incrementCounter(stat.tags, child.tagName);
+            if (child.classList.length > 0) {
+                for (let index = 0; index < child.classList.length; index++) {
+                    const cssClass = child.classList[index];
+
+                    incrementCounter(stat.classes, cssClass);
+                }
+            }
+
+            let statChild = collectDOMStat(child);
+
+            stat.texts += statChild.texts;
+            for (const keyTag in statChild.tags) {
+                if (statChild.tags.hasOwnProperty(keyTag)) {
+                    incrementCounter(stat.tags, keyTag, statChild.tags[keyTag], statChild.tags[keyTag]);
+                }
+            }
+
+            for (const keyClass in statChild.classes) {
+                if (statChild.classes.hasOwnProperty(keyClass)) {
+                    incrementCounter(stat.classes, keyClass, statChild.classes[keyClass], statChild.classes[keyClass]);
+                }
+            }
+
+        }
+    }
+
+    return stat;
 }
 
 /*
