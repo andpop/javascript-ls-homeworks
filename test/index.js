@@ -57,7 +57,6 @@ describe('ДЗ 4 - Работа с DOM', () => {
         });
     });
 
-/*
     describe('findAllPSiblings', () => {
         it('должна возвращать массив с элементами, соседями которых являются P', () => {
             let where = document.createElement('div');
@@ -70,6 +69,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
             assert.deepEqual(result, [where.children[0], where.children[3]]);
         });
     });
+
 
     describe('findError', () => {
         it('должна возвращать массив из текстового содержимого элементов', () => {
@@ -86,6 +86,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
         });
     });
 
+/*
     describe('deleteTextNodes', () => {
         it('должна удалить все текстовые узлы', () => {
             let where = document.createElement('div');
