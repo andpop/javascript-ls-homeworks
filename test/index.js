@@ -39,7 +39,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
         });
     });
 
-/*
+
     describe('prepend', () => {
         it('должна добавлять элемент в начало', () => {
             let where = document.createElement('div');
@@ -57,6 +57,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
         });
     });
 
+/*
     describe('findAllPSiblings', () => {
         it('должна возвращать массив с элементами, соседями которых являются P', () => {
             let where = document.createElement('div');

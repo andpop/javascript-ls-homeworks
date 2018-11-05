@@ -21,12 +21,16 @@ function createDivWithText(text) {
 /*
  Задание 2:
 
- Функция должна вставлять элемент, переданный в переметре what в начало элемента, переданного в параметре where
+ Функция должна вставлять элемент, переданный в пареметре what в начало элемента, переданного в параметре where
 
  Пример:
-   prepend(document.querySelector('#one'), document.querySelector('#two')) // добавит элемент переданный первым аргументом в начало элемента переданного вторым аргументом
+   prepend(document.querySelector('#one'), document.querySelector('#two')) // добавит элемент переданный первым
+   аргументом в начало элемента переданного вторым аргументом
  */
 function prepend(what, where) {
+    where.prepend(what);
+    // Без метода prepend можно так
+    // where.insertBefore(what, where.firstChild);
 }
 
 /*
