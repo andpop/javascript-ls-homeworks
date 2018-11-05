@@ -98,7 +98,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
         });
     });
 
-/*
+
     describe('deleteTextNodesRecursive', () => {
         it('должна рекурсивно удалить все текстовые узлы', () => {
             let where = document.createElement('div');
@@ -113,6 +113,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
         });
     });
 
+/*
     describe('collectDOMStat', () => {
         it('должна вернуть статистику по переданному дереву', () => {
             let where = document.createElement('div');
