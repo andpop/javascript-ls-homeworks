@@ -58,7 +58,7 @@ function findAllPSiblings(where) {
     const result = [];
 
     for (const element of where.children) {
-        if ( element.nextElementSibling && element.nextElementSibling.nodeName === 'P' ) {
+        if ( element.nextElementSibling && element.nextElementSibling.tagName === 'P' ) {
             result.push(element);
         }
     }
@@ -107,6 +107,11 @@ function findError(where) {
    должно быть преобразовано в <div></div><p></p>
  */
 function deleteTextNodes(where) {
+    for (const element of where.childNodes) {
+        if (element.nodeType === 3) {
+            where.removeChild(element);
+        }
+    }
 }
 
 /*

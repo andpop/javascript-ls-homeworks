@@ -86,7 +86,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
         });
     });
 
-/*
+
     describe('deleteTextNodes', () => {
         it('должна удалить все текстовые узлы', () => {
             let where = document.createElement('div');
@@ -98,6 +98,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
         });
     });
 
+/*
     describe('deleteTextNodesRecursive', () => {
         it('должна рекурсивно удалить все текстовые узлы', () => {
             let where = document.createElement('div');
