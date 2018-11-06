@@ -58,7 +58,7 @@ function findAllPSiblings(where) {
     const result = [];
 
     for (const element of where.children) {
-        if ( element.nextElementSibling && element.nextElementSibling.tagName === 'P' ) {
+        if (element.nextElementSibling && element.nextElementSibling.tagName === 'P') {
             result.push(element);
         }
     }
@@ -159,50 +159,41 @@ function deleteTextNodesRecursive(where) {
  */
 function collectDOMStat(root) {
     // Функция для увеличения счетчика - свойства с именем counterName в объекте obj.
-    function incrementCounter(obj, counterName, initial = 1, delta = 1) {
-        obj[counterName] = (typeof obj[counterName] === 'undefined') ? initial : obj[counterName] + delta;
+    function incrementCounter(obj, counterName) {
+        obj[counterName] = (counterName in obj) ? obj[counterName] + 1 : 1;
     }
 
+    function getElementStatistic(element) {
+        for (const child of element.childNodes) {
+            if (child.nodeType === 3) {
+                // text node
+                DOMStat.texts++;
+            } else if (child.nodeType === 1) {
+                // element node
+                incrementCounter(DOMStat.tags, child.tagName);
+                if (child.classList.length > 0) {
+                    for (const className of child.classList) {
+                        incrementCounter(DOMStat.classes, className);
+                    }
+                }
+
+                if (child.childNodes.length > 0) {
+                    // Рекурсивный вызов функции
+                    getElementStatistic(child);
+                }
+            }
+
+        }
+    }
+
+    // Результирующий объект со статистикой
     const DOMStat = {
         tags: {},
         classes: {},
         texts: 0
     };
 
-    const childNodes = root.childNodes;
-
-    for (const child of childNodes) {
-        if (child.nodeType === 3) {
-            // text node
-            DOMStat.texts ++;
-        } else if (child.nodeType === 1) {
-            // element node
-            incrementCounter(DOMStat.tags, child.tagName);
-            if (child.classList.length > 0) {
-                for (const CSSclass of child.classList) {
-                    incrementCounter(DOMStat.classes, CSSclass);
-                }
-            }
-
-            // рекурсивно запускаем collectDOMStat для обработки вложенных узлов
-            const DOMStatChild = collectDOMStat(child);
-
-            DOMStat.texts += DOMStatChild.texts;
-            for (const tag in DOMStatChild.tags) {
-                if (DOMStatChild.tags.hasOwnProperty(tag)) {
-                    incrementCounter(DOMStat.tags, tag, DOMStatChild.tags[tag], DOMStatChild.tags[tag]);
-                }
-            }
-
-            for (const elementClass in DOMStatChild.classes) {
-                if (DOMStatChild.classes.hasOwnProperty(elementClass)) {
-                    incrementCounter(DOMStat.classes, elementClass, DOMStatChild.classes[elementClass],
-                        DOMStatChild.classes[elementClass]);
-                }
-            }
-
-        }
-    }
+    getElementStatistic(root);
 
     return DOMStat;
 }
