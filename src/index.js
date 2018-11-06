@@ -163,46 +163,48 @@ function collectDOMStat(root) {
         obj[counterName] = (typeof obj[counterName] === 'undefined') ? initial : obj[counterName] + delta;
     }
 
-    let stat = {
+    const DOMStat = {
         tags: {},
         classes: {},
         texts: 0
     };
 
-    let childs = root.childNodes;
+    const childNodes = root.childNodes;
 
-    for (let i = 0; i < childs.length; i++) {
-        let child = childs[i];
-
+    for (const child of childNodes) {
         if (child.nodeType === 3) {
-            stat.texts ++;
+            // text node
+            DOMStat.texts ++;
         } else if (child.nodeType === 1) {
-            incrementCounter(stat.tags, child.tagName);
+            // element node
+            incrementCounter(DOMStat.tags, child.tagName);
             if (child.classList.length > 0) {
                 for (const CSSclass of child.classList) {
-                    incrementCounter(stat.classes, CSSclass);
+                    incrementCounter(DOMStat.classes, CSSclass);
                 }
             }
 
-            let statChild = collectDOMStat(child);
+            // рекурсивно запускаем collectDOMStat для обработки вложенных узлов
+            const DOMStatChild = collectDOMStat(child);
 
-            stat.texts += statChild.texts;
-            for (const keyTag in statChild.tags) {
-                if (statChild.tags.hasOwnProperty(keyTag)) {
-                    incrementCounter(stat.tags, keyTag, statChild.tags[keyTag], statChild.tags[keyTag]);
+            DOMStat.texts += DOMStatChild.texts;
+            for (const tag in DOMStatChild.tags) {
+                if (DOMStatChild.tags.hasOwnProperty(tag)) {
+                    incrementCounter(DOMStat.tags, tag, DOMStatChild.tags[tag], DOMStatChild.tags[tag]);
                 }
             }
 
-            for (const keyClass in statChild.classes) {
-                if (statChild.classes.hasOwnProperty(keyClass)) {
-                    incrementCounter(stat.classes, keyClass, statChild.classes[keyClass], statChild.classes[keyClass]);
+            for (const elementClass in DOMStatChild.classes) {
+                if (DOMStatChild.classes.hasOwnProperty(elementClass)) {
+                    incrementCounter(DOMStat.classes, elementClass, DOMStatChild.classes[elementClass],
+                        DOMStatChild.classes[elementClass]);
                 }
             }
 
         }
     }
 
-    return stat;
+    return DOMStat;
 }
 
 /*
