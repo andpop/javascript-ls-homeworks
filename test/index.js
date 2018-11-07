@@ -40,7 +40,6 @@ describe('ДЗ 5.1 - DOM Events', () => {
         });
     });
 
-/*
     describe('skipDefault', () => {
         it('должна добавлять такой обработчик, который предотвращает действие по умолчанию', () => {
             let target = document.createElement('div');
@@ -69,6 +68,7 @@ describe('ДЗ 5.1 - DOM Events', () => {
         });
     });
 
+/*
     describe('delegate', () => {
         it('должна добавлять обработчик кликов, который реагирует только на клики по кнопкам', () => {
             let target = document.createElement('div');

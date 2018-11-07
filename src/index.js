@@ -36,6 +36,9 @@ function removeListener(eventName, target, fn) {
    // приводить к переходу на другую страницу
  */
 function skipDefault(eventName, target) {
+    target.addEventListener(eventName, event => {
+        event.preventDefault();
+    });
 }
 
 /*
@@ -47,6 +50,9 @@ function skipDefault(eventName, target) {
    emulateClick(document.querySelector('a')) // для указанного элемента должно быть сэмулировано события click
  */
 function emulateClick(target) {
+    const event = new Event('click');
+
+    target.dispatchEvent(event);
 }
 
 /*
