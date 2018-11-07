@@ -66,6 +66,12 @@ function emulateClick(target) {
    // который будет вызывать указанную функцию только если кликнули на кнопку (элемент с тегом button)
  */
 function delegate(target, fn) {
+    target.addEventListener('click', function (event) {
+        if (event.target.tagName.toUpperCase() === 'BUTTON') {
+            fn();
+        }
+
+    });
 }
 
 /*
@@ -79,6 +85,7 @@ function delegate(target, fn) {
    // кликов для указанного элемента, который вызовется только один раз и затем удалится
  */
 function once(target, fn) {
+
 }
 
 export {

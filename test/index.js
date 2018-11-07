@@ -68,7 +68,6 @@ describe('ДЗ 5.1 - DOM Events', () => {
         });
     });
 
-/*
     describe('delegate', () => {
         it('должна добавлять обработчик кликов, который реагирует только на клики по кнопкам', () => {
             let target = document.createElement('div');
@@ -91,7 +90,7 @@ describe('ДЗ 5.1 - DOM Events', () => {
             assert(passed);
         });
     });
-
+/*
     describe('once', () => {
         it('должна добавлять обработчик кликов, который сработает только один раз и удалится', () => {
             let target = document.createElement('div');
