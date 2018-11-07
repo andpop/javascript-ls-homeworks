@@ -90,7 +90,7 @@ describe('ДЗ 5.1 - DOM Events', () => {
             assert(passed);
         });
     });
-/*
+
     describe('once', () => {
         it('должна добавлять обработчик кликов, который сработает только один раз и удалится', () => {
             let target = document.createElement('div');
@@ -108,5 +108,4 @@ describe('ДЗ 5.1 - DOM Events', () => {
             target.dispatchEvent(new CustomEvent(eventName));
         });
     });
-*/
 });

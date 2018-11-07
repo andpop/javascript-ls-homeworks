@@ -85,7 +85,7 @@ function delegate(target, fn) {
    // кликов для указанного элемента, который вызовется только один раз и затем удалится
  */
 function once(target, fn) {
-
+    target.addEventListener('click', fn, { 'once': true });
 }
 
 export {
