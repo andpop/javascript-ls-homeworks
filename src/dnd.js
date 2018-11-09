@@ -43,14 +43,19 @@ function randomColor() {
 function createDiv() {
     const minDivWidth = 50,
         minDivHeight = 50,
-        maxDivWidth = document.documentElement.clientWidth - 50,
-        maxDivHeight = document.documentElement.clientHeight - 50;
+        maxDivWidth = document.documentElement.clientWidth - 100,
+        maxDivHeight = document.documentElement.clientHeight - 100;
+    const width = randomInt(minDivWidth, maxDivWidth);
+    const height = randomInt(minDivHeight, maxDivHeight);
+    const top = randomInt(0, maxDivHeight - height);
+    const left = randomInt(0, maxDivWidth - width);
     const div = document.createElement('div');
 
-    // console.log(document.documentElement.clientWidth, document.documentElement.clientHeight);
     div.style.position = 'absolute';
-    div.style.width = randomInt(minDivWidth, maxDivWidth) + 'px';
-    div.style.height = randomInt(minDivHeight, maxDivHeight) + 'px';
+    div.style.width = width + 'px';
+    div.style.height = height + 'px';
+    div.style.top = top + 'px';
+    div.style.left = left + 'px';
     div.style.backgroundColor = randomColor();
     div.className = 'draggable-div';
 
