@@ -58,6 +58,7 @@ function createDiv() {
     div.style.left = left + 'px';
     div.style.backgroundColor = randomColor();
     div.className = 'draggable-div';
+    div.setAttribute('draggable', true);
 
     return div;
 }
