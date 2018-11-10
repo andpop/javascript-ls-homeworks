@@ -59,6 +59,7 @@ function createDiv() {
     div.style.backgroundColor = randomColor();
     div.className = 'draggable-div';
     div.setAttribute('draggable', true);
+    div.setAttribute('id', new Date().getTime());
 
     return div;
 }
@@ -72,7 +73,49 @@ function createDiv() {
    addListeners(newDiv);
  */
 function addListeners(target) {
+    target.addEventListener('dragstart', event => {
+        const leftMargin = event.clientX - parseInt(event.target.style.left, 10);
+        const topMargin = event.clientY - parseInt(event.target.style.top, 10);
+
+        event.target.style.opacity = '0.6';
+        event.dataTransfer.effectAllowed='move';
+        event.dataTransfer.setData('id', event.target.id);
+        event.dataTransfer.setData('leftMargin', leftMargin);
+        event.dataTransfer.setData('topMargin', topMargin);
+        homeworkContainer.style.top = 0;
+        homeworkContainer.style.left = 0;
+    });
 }
+
+function setContainerProperties() {
+    homeworkContainer.style.position = 'absolute';
+    homeworkContainer.style.width = document.documentElement.clientWidth + 'px';
+    homeworkContainer.style.height = document.documentElement.clientHeight + 'px';
+
+}
+
+function addContainerListeners() {
+    // Делаем контейнер способным принять перемещаемый объект
+    homeworkContainer.addEventListener('dragover', event => {
+        event.preventDefault();
+    });
+
+    // Меняем свойства left и top для рендеринга перемещенного объекта
+    homeworkContainer.addEventListener('drop', event => {
+        const id = event.dataTransfer.getData('id');
+        const movedDiv = document.getElementById(id);
+        const left = event.clientX - event.dataTransfer.getData('leftMargin');
+        const top = event.clientY - event.dataTransfer.getData('topMargin');
+
+        event.preventDefault();
+        movedDiv.style.opacity = '1';
+        movedDiv.style.left = left + 'px';
+        movedDiv.style.top = top + 'px';
+    })
+}
+
+setContainerProperties();
+addContainerListeners();
 
 let addDivButton = homeworkContainer.querySelector('#addDiv');
 
