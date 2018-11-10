@@ -59,6 +59,7 @@ function createDiv() {
     div.style.backgroundColor = randomColor();
     div.className = 'draggable-div';
     div.setAttribute('draggable', true);
+    // Генерируем уникальный id для создаваемого элемента div
     div.setAttribute('id', new Date().getTime());
 
     return div;
@@ -88,7 +89,8 @@ function addListeners(target) {
 }
 
 function setContainerProperties() {
-    homeworkContainer.style.position = 'absolute';
+    // Контейнер растягиваем на весь экран, чтобы перемещаемый элемент в него попадал
+    homeworkContainer.style.position = 'relative';
     homeworkContainer.style.width = document.documentElement.clientWidth + 'px';
     homeworkContainer.style.height = document.documentElement.clientHeight + 'px';
 }
