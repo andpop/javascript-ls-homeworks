@@ -91,7 +91,6 @@ function setContainerProperties() {
     homeworkContainer.style.position = 'absolute';
     homeworkContainer.style.width = document.documentElement.clientWidth + 'px';
     homeworkContainer.style.height = document.documentElement.clientHeight + 'px';
-
 }
 
 function addContainerListeners() {
