@@ -9,15 +9,22 @@
    delayPromise(3) // вернет promise, который будет разрешен через 3 секунды
  */
 function delayPromise(seconds) {
-    
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve();
+            // console.log('resolved');
+        }, seconds * 1000);
+    });
 }
+
+// delayPromise(3).then(() => console.log('11111'));
 
 /*
  Задание 2:
 
  2.1: Функция должна вернуть Promise, который должен быть разрешен с массивом городов в качестве значения
 
- Массив городов пожно получить отправив асинхронный запрос по адресу
+ Массив городов можно получить отправив асинхронный запрос по адресу
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
 
  2.2: Элементы полученного массива должны быть отсортированы по имени города
