@@ -12,12 +12,9 @@ function delayPromise(seconds) {
     return new Promise(resolve => {
         setTimeout(() => {
             resolve();
-            // console.log('resolved');
         }, seconds * 1000);
     });
 }
-
-// delayPromise(3).then(() => console.log('11111'));
 
 /*
  Задание 2:
