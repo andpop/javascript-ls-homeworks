@@ -20,7 +20,6 @@ describe('ДЗ 6.1 - Асинхронность и работа с сетью', 
         });
     });
 
-/*
     describe('loadAndSortTowns', () => {
         it('должна возвращать Promise', () => {
             let result = loadAndSortTowns();
@@ -51,5 +50,4 @@ describe('ДЗ 6.1 - Асинхронность и работа с сетью', 
             /!* eslint-enable *!/
         });
     });
-*/
 });

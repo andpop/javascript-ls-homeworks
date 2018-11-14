@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function loadAndSortTowns() {
+        function sortTownsFunction(a, b) {
+            if (a.name > b.name) {
+                return 1;
+            } else if (a.name < b.name) {
+                return -1;
+            } else {
+                return 0;
+            }
+        }
+
+        return fetch('https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json')
+            .then(response => response.json())
+            .then(towns => towns.sort(sortTownsFunction));
+    }
+
+    loadAndSortTowns().then(towns => console.log(towns));
+
+    // fetch('https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json').then(response => response.json()).then(json => {
+    //     console.log(json);
+    // });
+
+</script>
+</body>
+</html>
