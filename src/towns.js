@@ -1,6 +1,6 @@
 /*
  Страница должна предварительно загрузить список городов из
- https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
+ https:   //raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  и отсортировать в алфавитном порядке.
 
  При вводе в текстовое поле, под ним должен появляться список тех городов,
@@ -24,7 +24,7 @@
  homeworkContainer - это контейнер для всех ваших домашних заданий
  Если вы создаете новые html-элементы и добавляете их на страницу, то добавляйте их только в этот контейнер
 
- Пример:
+ Пример: 
    const newDiv = document.createElement('div');
    homeworkContainer.appendChild(newDiv);
  */
@@ -34,7 +34,7 @@ const homeworkContainer = document.querySelector('#homework-container');
  Функция должна вернуть Promise, который должен быть разрешен с массивом городов в качестве значения
 
  Массив городов пожно получить отправив асинхронный запрос по адресу
- https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
+ https:   //raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  */
 function loadTowns() {
     function sortTownsFunction(a, b) {
@@ -56,7 +56,7 @@ function loadTowns() {
  Функция должна проверять встречается ли подстрока chunk в строке full
  Проверка должна происходить без учета регистра символов
 
- Пример:
+ Пример: 
    isMatching('Moscow', 'moscow') // true
    isMatching('Moscow', 'mosc') // true
    isMatching('Moscow', 'cow') // true
@@ -79,6 +79,7 @@ function displayFilteredTowns(filteredTowns) {
     filterResult.innerHTML = townsListHTML;
 }
 
+
 /* Блок с надписью "Загрузка" */
 const loadingBlock = homeworkContainer.querySelector('#loading-block');
 /* Блок с текстовым полем и результатом поиска */
@@ -87,7 +88,9 @@ const filterBlock = homeworkContainer.querySelector('#filter-block');
 const filterInput = homeworkContainer.querySelector('#filter-input');
 /* Блок с результатами поиска */
 const filterResult = homeworkContainer.querySelector('#filter-result');
-let townsList = [];
+let   townsList    = [];
+
+main();
 
 filterInput.addEventListener('keyup', function () {
     // это обработчик нажатия клавиш в текстовом поле
@@ -96,24 +99,32 @@ filterInput.addEventListener('keyup', function () {
     displayFilteredTowns(filteredTowns);
 });
 
-loadTowns()
+function main() {
+    loadTowns()
     .then(towns => {
-        townsList = towns;
+        townsList                  = towns;
         loadingBlock.style.display = 'none';
-        filterBlock.style.display = 'block';
-    });
-/*
+        filterBlock.style.display  = 'block';
+        let retryButton = document.querySelector('#retry-btn');
+        if (retryButton) {
+            retryButton.remove();
+        }
+    })
     .catch(error => {
         console.log(error.message);
         loadingBlock.textContent = 'Не удалось загрузить города';
-        const retryButton = document.createElement('button');
-        retryButton.textContent = 'Повторить';
-        homeworkContainer.appendChild(retryButton);
-        retryButton.addEventListener('click', () => {
-            loadTowns();
-        });
+        let retryButton = document.querySelector('#retry-btn');
+        if (!retryButton) {
+            retryButton = document.createElement('button');
+            retryButton.textContent = 'Повторить';
+            retryButton.id = 'retry-btn';
+            homeworkContainer.appendChild(retryButton);
+            retryButton.addEventListener('click', () => {
+                main();
+            });
+        }
     });
-*/
+}
 
 export {
     loadTowns,
