@@ -64,8 +64,14 @@ function loadTowns() {
    isMatching('Moscow', 'Moscov') // false
  */
 function isMatching(full, chunk) {
+    const regexp = new RegExp(chunk, 'i');
+
+    return regexp.test(full);
 }
 
+function filterTowns(filterValue) {
+    return townsList.filter(town => isMatching(town.name, filterValue));
+}
 /* Блок с надписью "Загрузка" */
 const loadingBlock = homeworkContainer.querySelector('#loading-block');
 /* Блок с текстовым полем и результатом поиска */
@@ -74,13 +80,17 @@ const filterBlock = homeworkContainer.querySelector('#filter-block');
 const filterInput = homeworkContainer.querySelector('#filter-input');
 /* Блок с результатами поиска */
 const filterResult = homeworkContainer.querySelector('#filter-result');
+let townsList;
 
 filterInput.addEventListener('keyup', function() {
-    // это обработчик нажатия кливиш в текстовом поле
+    // это обработчик нажатия клавиш в текстовом поле
+    const filteredTowns = filterTowns(filterInput.value);
+
+    console.log(filteredTowns);
 });
 
 loadTowns().then(towns => {
-    console.log(towns);
+    townsList = towns;
     loadingBlock.style.display = 'none';
     filterBlock.style.display = 'block';
 });
