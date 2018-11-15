@@ -79,8 +79,11 @@ filterInput.addEventListener('keyup', function() {
     // это обработчик нажатия кливиш в текстовом поле
 });
 
-console.log('In towns.js');
-loadTowns().then(towns => console.log(towns));
+loadTowns().then(towns => {
+    console.log(towns);
+    loadingBlock.style.display = 'none';
+    filterBlock.style.display = 'block';
+});
 
 export {
     loadTowns,
