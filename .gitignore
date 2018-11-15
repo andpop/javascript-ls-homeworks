@@ -8,3 +8,5 @@ out/
 dist/
 node_modules/
 coverage/
+src/1.html
+src/1.js

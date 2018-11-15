@@ -37,6 +37,19 @@ const homeworkContainer = document.querySelector('#homework-container');
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  */
 function loadTowns() {
+    function sortTownsFunction(a, b) {
+        if (a.name > b.name) {
+            return 1;
+        } else if (a.name < b.name) {
+            return -1;
+        }
+
+        return 0;
+    }
+
+    return fetch('https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json')
+        .then(response => response.json())
+        .then(towns => towns.sort(sortTownsFunction));
 }
 
 /*
@@ -65,6 +78,9 @@ const filterResult = homeworkContainer.querySelector('#filter-result');
 filterInput.addEventListener('keyup', function() {
     // это обработчик нажатия кливиш в текстовом поле
 });
+
+console.log('In towns.js');
+loadTowns().then(towns => console.log(towns));
 
 export {
     loadTowns,
