@@ -47,7 +47,7 @@ function loadTowns() {
         return 0;
     }
 
-    return fetch('https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json1')
+    return fetch('https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json')
         .then(response => response.json())
         .then(towns => towns.sort(sortTownsFunction));
 }
@@ -68,7 +68,7 @@ function isMatching(full, chunk) {
 }
 
 function filterTowns(towns, filterValue) {
-    return towns.filter(town => isMatching(town.name, filterValue));
+    return filterValue !== '' ? towns.filter(town => isMatching(town.name, filterValue)) : [];
 }
 
 function displayFilteredTowns(filteredTowns) {
