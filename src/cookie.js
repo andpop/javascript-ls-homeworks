@@ -50,7 +50,9 @@ filterNameInput.addEventListener('keyup', function() {
 addButton.addEventListener('click', () => {
     // здесь можно обработать нажатие на кнопку "добавить cookie"
     document.cookie = `${addNameInput.value}=${addValueInput.value}`;
-    // console.log(`${addNameInput}=${addValueInput}`);
+    displayCookiesInTable(getCookies());
+    addNameInput.value = '';
+    addValueInput.value = '';
 });
 
 // Преобразование строки с куками в объект (имя свойства = имя куки, значение свойства = значение куки)
@@ -62,13 +64,31 @@ function getCookies() {
   }, {});
 }
 
-function displayCookies(cookies) {
+function displayCookiesInTable(cookies) {
+  listTable.innerHTML = '';
   for (let cookieName in cookies) {
+    const tr = document.createElement('tr');
+
+    let td = document.createElement('td');
+    td.textContent = cookieName;
+    tr.appendChild(td);
+
+    td = document.createElement('td');
+    td.textContent = cookies[cookieName];
+    tr.appendChild(td);
+
+    td = document.createElement('td');
+    const button = document.createElement('button');
+    button.textContent = 'Удалить';
+    td.appendChild(button);
+    tr.appendChild(td);
+
+    listTable.appendChild(tr);
     console.log(cookieName, '=', cookies[cookieName]);
   }
 }
 
 const cookies = getCookies();
-displayCookies(cookies);
+displayCookiesInTable(cookies);
 
 console.log(cookies);
