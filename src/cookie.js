@@ -51,8 +51,8 @@ addButton.addEventListener('click', () => {
     // здесь можно обработать нажатие на кнопку "добавить cookie"
     document.cookie = `${addNameInput.value}=${addValueInput.value}`;
     displayCookiesInTable(getCookies());
-    addNameInput.value = '';
-    addValueInput.value = '';
+    // addNameInput.value = '';
+    // addValueInput.value = '';
 });
 
 // Преобразование строки с куками в объект (имя свойства = имя куки, значение свойства = значение куки)
@@ -88,7 +88,23 @@ function displayCookiesInTable(cookies) {
   }
 }
 
+function deleteCookie(name) {
+  const date = new Date(0);
+  document.cookie = `${name}=; expires=${date.toUTCString()}`;
+  displayCookiesInTable(getCookies());
+}
+
+// Удаление cookie по кнопке "Удалить"
+listTable.addEventListener('click', e => {
+  if (e.target.tagName === 'BUTTON') {
+    let cookieName = e.target.parentNode.previousElementSibling.previousElementSibling.textContent;
+    deleteCookie(cookieName);
+    console.log(cookieName);
+  }
+  
+})
+
+// ==============================================================
 const cookies = getCookies();
 displayCookiesInTable(cookies);
 
-console.log(cookies);
