@@ -52,3 +52,23 @@ addButton.addEventListener('click', () => {
     document.cookie = `${addNameInput.value}=${addValueInput.value}`;
     // console.log(`${addNameInput}=${addValueInput}`);
 });
+
+// Преобразование строки с куками в объект (имя свойства = имя куки, значение свойства = значение куки)
+function getCookies() {
+  return document.cookie.split('; ').reduce((prev, current) => {
+    const [name, value] = current.split('=');
+    prev[name] = value;
+    return prev;
+  }, {});
+}
+
+function displayCookies(cookies) {
+  for (let cookieName in cookies) {
+    console.log(cookieName, '=', cookies[cookieName]);
+  }
+}
+
+const cookies = getCookies();
+displayCookies(cookies);
+
+console.log(cookies);
