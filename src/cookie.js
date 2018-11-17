@@ -57,50 +57,50 @@ addButton.addEventListener('click', () => {
 
 // Преобразование строки с куками в объект (имя свойства = имя куки, значение свойства = значение куки)
 function getCookies() {
-  return document.cookie.split('; ').reduce((prev, current) => {
-    const [name, value] = current.split('=');
-    prev[name] = value;
-    return prev;
-  }, {});
+    return document.cookie.split('; ').reduce((prev, current) => {
+        const [name, value] = current.split('=');
+        prev[name] = value;
+        return prev;
+    }, {});
 }
 
 function displayCookiesInTable(cookies) {
-  listTable.innerHTML = '';
-  for (let cookieName in cookies) {
-    const tr = document.createElement('tr');
+    listTable.innerHTML = '';
+    for (let cookieName in cookies) {
+        const tr = document.createElement('tr');
 
-    let td = document.createElement('td');
-    td.textContent = cookieName;
-    tr.appendChild(td);
+        let td = document.createElement('td');
+        td.textContent = cookieName;
+        tr.appendChild(td);
 
-    td = document.createElement('td');
-    td.textContent = cookies[cookieName];
-    tr.appendChild(td);
+        td = document.createElement('td');
+        td.textContent = cookies[cookieName];
+        tr.appendChild(td);
 
-    td = document.createElement('td');
-    const button = document.createElement('button');
-    button.textContent = 'Удалить';
-    td.appendChild(button);
-    tr.appendChild(td);
+        td = document.createElement('td');
+        const button = document.createElement('button');
+        button.textContent = 'Удалить';
+        td.appendChild(button);
+        tr.appendChild(td);
 
-    listTable.appendChild(tr);
-    // console.log(cookieName, '=', cookies[cookieName]);
-  }
+        listTable.appendChild(tr);
+        // console.log(cookieName, '=', cookies[cookieName]);
+    }
 }
 
 function deleteCookie(name) {
-  const date = new Date(0);
-  document.cookie = `${name}=; expires=${date.toUTCString()}`;
-  displayCookiesInTable(getCookies());
+    const date = new Date(0);
+    document.cookie = `${name}=; expires=${date.toUTCString()}`;
+    displayCookiesInTable(getCookies());
 }
 
 // Удаление cookie по кнопке "Удалить"
 listTable.addEventListener('click', e => {
-  if (e.target.tagName === 'BUTTON') {
-    let cookieName = e.target.parentNode.previousElementSibling.previousElementSibling.textContent;
-    deleteCookie(cookieName);
-    // console.log(cookieName);
-  }
+    if (e.target.tagName === 'BUTTON') {
+        let cookieName = e.target.parentNode.previousElementSibling.previousElementSibling.textContent;
+        deleteCookie(cookieName);
+        // console.log(cookieName);
+    }
   
 })
 
