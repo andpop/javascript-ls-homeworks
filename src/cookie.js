@@ -43,6 +43,10 @@ const addButton = homeworkContainer.querySelector('#add-button');
 // таблица со списком cookie
 const listTable = homeworkContainer.querySelector('#list-table tbody');
 
+function isMatching(full, chunk) {
+    return (new RegExp(chunk, 'i')).test(full);
+}
+
 filterNameInput.addEventListener('keyup', function() {
     // здесь можно обработать нажатия на клавиши внутри текстового поля для фильтрации cookie
 });
@@ -59,7 +63,9 @@ addButton.addEventListener('click', () => {
 function getCookies() {
     return document.cookie.split('; ').reduce((prev, current) => {
         const [name, value] = current.split('=');
+
         prev[name] = value;
+
         return prev;
     }, {});
 }
@@ -67,29 +73,33 @@ function getCookies() {
 function displayCookiesInTable(cookies) {
     listTable.innerHTML = '';
     for (let cookieName in cookies) {
-        const tr = document.createElement('tr');
-
-        let td = document.createElement('td');
-        td.textContent = cookieName;
-        tr.appendChild(td);
-
-        td = document.createElement('td');
-        td.textContent = cookies[cookieName];
-        tr.appendChild(td);
-
-        td = document.createElement('td');
-        const button = document.createElement('button');
-        button.textContent = 'Удалить';
-        td.appendChild(button);
-        tr.appendChild(td);
-
-        listTable.appendChild(tr);
-        // console.log(cookieName, '=', cookies[cookieName]);
+        if (cookies.hasOwnProperty(cookieName)) {
+            const tr = document.createElement('tr');
+            let td = document.createElement('td');
+    
+            td.textContent = cookieName;
+            tr.appendChild(td);
+    
+            td = document.createElement('td');
+            td.textContent = cookies[cookieName];
+            tr.appendChild(td);
+    
+            td = document.createElement('td');
+            const button = document.createElement('button');
+    
+            button.textContent = 'Удалить';
+            td.appendChild(button);
+            tr.appendChild(td);
+    
+            listTable.appendChild(tr);
+            // console.log(cookieName, '=', cookies[cookieName]);
+        }
     }
 }
 
 function deleteCookie(name) {
     const date = new Date(0);
+
     document.cookie = `${name}=; expires=${date.toUTCString()}`;
     displayCookiesInTable(getCookies());
 }
@@ -98,6 +108,7 @@ function deleteCookie(name) {
 listTable.addEventListener('click', e => {
     if (e.target.tagName === 'BUTTON') {
         let cookieName = e.target.parentNode.previousElementSibling.previousElementSibling.textContent;
+
         deleteCookie(cookieName);
         // console.log(cookieName);
     }
@@ -106,5 +117,6 @@ listTable.addEventListener('click', e => {
 
 // ==============================================================
 const cookies = getCookies();
+
 displayCookiesInTable(cookies);
 
