@@ -84,7 +84,7 @@ function displayCookiesInTable(cookies) {
     tr.appendChild(td);
 
     listTable.appendChild(tr);
-    console.log(cookieName, '=', cookies[cookieName]);
+    // console.log(cookieName, '=', cookies[cookieName]);
   }
 }
 
@@ -99,7 +99,7 @@ listTable.addEventListener('click', e => {
   if (e.target.tagName === 'BUTTON') {
     let cookieName = e.target.parentNode.previousElementSibling.previousElementSibling.textContent;
     deleteCookie(cookieName);
-    console.log(cookieName);
+    // console.log(cookieName);
   }
   
 })
