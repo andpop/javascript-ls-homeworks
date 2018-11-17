@@ -132,16 +132,20 @@ describe('ДЗ 7.2 - Cookie editor', () => {
             addValueInput.value = 'test-cookie-value-2';
             addButton.click();
 
+            cookies = getCookies();
+
             deleteButton = listTable.querySelector('button');
 
             deleteButton.click();
             cookies = getCookies();
+
             assert.equal(Object.keys(cookies).length, 1, 'cookie не удалена из браузера');
             assert.equal(listTable.children.length, 1, 'cookie не удалена из таблицы');
 
             deleteButton = listTable.querySelector('button');
             deleteButton.click();
             cookies = getCookies();
+
             assert.equal(Object.keys(cookies).length, 0, 'cookie не удалена из браузера');
             assert.equal(listTable.children.length, 0, 'cookie не удалена из таблицы');
         });

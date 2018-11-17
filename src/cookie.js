@@ -62,7 +62,7 @@ addButton.addEventListener('click', () => {
 
 
 /* 
-// Преобразование строки с куками в объект (имя свойства = имя куки, значение свойства = значение куки)
+// Преобразование строки с куками в объект (имя свойства = имя куки, значение свойства = значение куки) - без фильтрации
 function getCookies() {
     const allCookies = document.cookie.split('; ').reduce((prev, current) => {
         const [name, value] = current.split('=');
@@ -77,19 +77,20 @@ function getCookies() {
 }
 */
 
-// Преобразование строки с куками в объект (имя свойства = имя куки, значение свойства = значение куки)
+// Преобразование строки с куками в объект (имя свойства = имя куки, значение свойства = значение куки) + отбор по значению фильтра
 function getCookies() {
     const filter = filterNameInput.value.trim(), 
                     filteredCookies = {};
     
-    for (let cookieItem of document.cookie.split('; ')) {
-        const [name, value] = cookieItem.split('=');
-        if (filter === '' || isMatching(name, filter) || isMatching(value, filter)) {
-            console.log(name, value);
-            filteredCookies[name] = value;
+    if (document.cookie.length > 0) {
+        for (let cookieItem of document.cookie.split('; ')) {
+            const [name, value] = cookieItem.split('=');
+            if (filter === '' || isMatching(name, filter) || isMatching(value, filter)) {
+                filteredCookies[name] = value;
+            }
         }
     }
-    
+
     return filteredCookies;
 }
 
@@ -115,7 +116,6 @@ function displayCookiesInTable(cookies) {
             tr.appendChild(td);
     
             listTable.appendChild(tr);
-            // console.log(cookieName, '=', cookies[cookieName]);
         }
     }
 }
@@ -133,7 +133,6 @@ listTable.addEventListener('click', e => {
         let cookieName = e.target.parentNode.previousElementSibling.previousElementSibling.textContent;
 
         deleteCookie(cookieName);
-        // console.log(cookieName);
     }
   
 })
