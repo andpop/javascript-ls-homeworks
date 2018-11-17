@@ -49,6 +49,7 @@ function isMatching(full, chunk) {
 
 filterNameInput.addEventListener('keyup', function() {
     // здесь можно обработать нажатия на клавиши внутри текстового поля для фильтрации cookie
+    console.log(filterNameInput.value);
 });
 
 addButton.addEventListener('click', () => {
@@ -61,13 +62,16 @@ addButton.addEventListener('click', () => {
 
 // Преобразование строки с куками в объект (имя свойства = имя куки, значение свойства = значение куки)
 function getCookies() {
-    return document.cookie.split('; ').reduce((prev, current) => {
+    const allCookies = document.cookie.split('; ').reduce((prev, current) => {
         const [name, value] = current.split('=');
 
         prev[name] = value;
 
         return prev;
     }, {});
+
+    const filter = filterNameInput.value;
+    return allCookies;
 }
 
 function displayCookiesInTable(cookies) {
