@@ -88,7 +88,7 @@ const filterBlock = homeworkContainer.querySelector('#filter-block');
 const filterInput = homeworkContainer.querySelector('#filter-input');
 /* Блок с результатами поиска */
 const filterResult = homeworkContainer.querySelector('#filter-result');
-let   townsList    = [];
+let townsList = [];
 
 main();
 
@@ -101,29 +101,29 @@ filterInput.addEventListener('keyup', function () {
 
 function main() {
     loadTowns()
-    .then(towns => {
-        townsList                  = towns;
-        loadingBlock.style.display = 'none';
-        filterBlock.style.display  = 'block';
-        let retryButton = document.querySelector('#retry-btn');
-        if (retryButton) {
-            retryButton.remove();
-        }
-    })
-    .catch(error => {
-        console.log(error.message);
-        loadingBlock.textContent = 'Не удалось загрузить города';
-        let retryButton = document.querySelector('#retry-btn');
-        if (!retryButton) {
-            retryButton = document.createElement('button');
-            retryButton.textContent = 'Повторить';
-            retryButton.id = 'retry-btn';
-            homeworkContainer.appendChild(retryButton);
-            retryButton.addEventListener('click', () => {
-                main();
-            });
-        }
-    });
+        .then(towns => {
+            townsList = towns;
+            loadingBlock.style.display = 'none';
+            filterBlock.style.display = 'block';
+            let retryButton = document.querySelector('#retry-btn');
+            if (retryButton) {
+                retryButton.remove();
+            }
+        })
+        .catch(error => {
+            console.log(error.message);
+            loadingBlock.textContent = 'Не удалось загрузить города';
+            let retryButton = document.querySelector('#retry-btn');
+            if (!retryButton) {
+                retryButton = document.createElement('button');
+                retryButton.textContent = 'Повторить';
+                retryButton.id = 'retry-btn';
+                homeworkContainer.appendChild(retryButton);
+                retryButton.addEventListener('click', () => {
+                    main();
+                });
+            }
+        });
 }
 
 export {
