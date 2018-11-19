@@ -119,9 +119,7 @@ function main() {
                 retryButton.textContent = 'Повторить';
                 retryButton.id = 'retry-btn';
                 homeworkContainer.appendChild(retryButton);
-                retryButton.addEventListener('click', () => {
-                    main();
-                });
+                retryButton.addEventListener('click', main);
             }
         });
 }
