@@ -1,4 +1,6 @@
-## LoftSchool example project
+## JavaScript tasks from LoftSchool
+## Домашние задания курса "Комплексный JavaScript"
+
 
 ### Доступные команды
 
